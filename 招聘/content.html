@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            font-family:  arial,"Microsoft YaHei","Hiragino Sans GB", 宋体, sans-serif;
+            color:#9198b1;
+            font-size:14px;
+        }
+        ul{
+            padding:0;
+            margin:0;
+            list-style:none;
+        }
+        a{
+            font-family:  arial,"Microsoft YaHei","Hiragino Sans GB", 宋体, sans-serif;
+            text-decoration:none;
+            color:#9198b1;
+            font-size:14px;
+        }
+        section{
+            width:1000px;
+            height:600px;
+            background:url("img/bg.jpg") no-repeat ;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .box{
+            width:700px;
+            height:460px;
+            background-color:#252934;
+            border-radius:20px;
+            overflow:hidden;
+        }
+        .box .head{
+
+            height:80px;
+        }
+        .box h2{
+            float:left;
+            margin:0;
+            height:80px;
+            padding-left:40px;
+            display:flex;
+            align-items:center;
+            font-size: 26px;
+            color:#fff;
+        }
+        .box h2 img{
+            width:115px;
+            height:28px;
+            margin-right:10px;
+        }
+        .box .head .nav{
+            float:right;
+            height:80px;
+            margin-right:20px;
+            display:flex;
+            align-items:center;
+        }
+        .box .head .nav a{
+            float:left;
+            height:36px;
+            line-height:36px;
+            margin:0 10px;
+            padding: 0 30px;
+        }
+        .box .head .nav a:nth-child(1):hover{
+            color:#fe2b4e;
+        }
+        .box .head .nav a:nth-child(2){
+            border:1px solid #fe2b4e;
+            border-radius:19px;
+            color:#fe2b4e;
+        }
+        .box .head .nav a:nth-child(2):hover{
+            background-color:#fe2b4e;
+            color:#000;
+        }
+        /*----内容----------------------------------------------*/
+        .content{
+            padding:26px 32px;
+
+        }
+        .content .describe{
+            height:95px;
+            border-bottom:1px dashed #313642;
+        }
+        .content .describe .info{
+            height:50px;
+            font-size:26px;
+            line-height:50px;
+        }
+        .content .describe .wrap{
+            height:34px;
+            font-size:26px;
+            line-height:50px;
+        }
+        .content .describe .wrap .aptitude{
+            float:left;
+            line-height:34px;
+            font-size:18px;
+        }
+        .content .describe .wrap time{
+            float:right;
+            line-height:34px;
+            font-size:18px;
+        }
+        /*-------------------------------------*/
+
+
+
+        .content .particular{
+            padding-top:18px;
+        }
+        .content .particular .info{
+            height:24px;
+            color:#b5bccd;
+            font-size:18px;
+        }
+        .content .particular ul{
+
+        }
+        .content .particular ul li{
+            line-height:24px;
+
+        }
+
+    </style>
+</head>
+<body>
+<section>
+    <div class="box">
+        <div class="head">
+            <h2>
+
+                招聘
+            </h2>
+            <div class="nav">
+                <a href="javascript:;">&lt返回招聘列表</a>
+                <a href="javascript:;">投个简历</a>
+            </div>
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+</section>
+<script src="js/data.js"></script>
+<script src="js/content.js"></script>
+</body>
+</html>

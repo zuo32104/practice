@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-size: 14px;
+            font-family: Arial, "微软雅黑", "Apple LiGothic Medium";
+        }
+
+        section {
+            width: 1000px;
+            height: 500px;
+            background-image: linear-gradient(90deg, #8eb6b5, #d17f96);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 760px;
+            height: 260px;
+            border: 1px solid #555;
+        }
+
+        .box .choose {
+            width: 100%;
+            height: 50px;
+            background: url("img1/nav_bg.png") no-repeat;
+            overflow: hidden;
+        }
+
+        .box .choose span {
+            float: left;
+            display: block;
+            width: 64px;
+            height: 50px;
+            padding-left: 22px;
+            line-height: 50px;
+            color: #000;
+        }
+
+        .choose .content {
+            float: left;
+            width: 670px;
+            height: 50px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+        }
+
+        .choose .content div {
+            display: inline-block;
+            height: 25px;
+            border: 1px solid #69bcd0;
+            margin: 10px 3px;
+            padding: 0 30px 0 10px;
+            line-height: 25px;
+            position: relative;
+        }
+
+        .choose .content div a {
+            position: absolute;
+            right: 2px;
+            top: calc(50% - 9px);
+            width: 18px;
+            height: 18px;
+            background: #1295b9;
+            line-height: 18px;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* ------------------------*/
+        .box .list {
+            height: 190px;
+            background: url("img1/type_bg.png") no-repeat;
+            margin: 0;
+            padding: 0;
+            padding-top: 20px;
+        }
+
+        .list .item {
+            overflow: hidden;
+        }
+
+        .list .item span {
+            float: left;
+            display: block;
+            height: 44px;
+            padding-left: 28px;
+            font: 14px/44px "微软雅黑";
+            color: #83959b;
+        }
+
+        .list .item .wrap {
+            float: left;
+            width: 670px;
+            height: 44px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+        }
+
+        .list .item .wrap a {
+            display: inline-block;
+            height: 44px;
+            font: 14px/44px "微软雅黑";
+            margin: 0 13px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .list .item .wrap a.active {
+            color: #29a1c4;
+        }
+
+    </style>
+</head>
+<body>
+<section>
+    <div class="box">
+        <nav class="choose">
+            <span>你的选择:</span>
+            <div class="content">
+            </div>
+        </nav>
+        <div class="list">
+
+        </div>
+
+    </div>
+    </div>
+</section>
+<script>
+    var data = [
+        {
+            'title': '品牌:',
+            'info': ['苹果', '小米', '锤子', '魅族', '华为', '三星', 'OPPO', 'vivo', '乐视', '360', '中兴']
+        },
+        {
+            'title': '尺寸:',
+            'info': ['3.0英寸以下', '3.0-3.9英寸', '4.0-4.5英寸', '4.6-4.9英寸', '5.0-5.5英寸', '6.0英寸以上']
+        },
+        {
+            'title': '系统:',
+            'info': ['安卓(Androin)', '苹果(IOS)', '微软(WindowsPhone)', '其他', '无']
+        },
+        {
+            'title': '网络:',
+            'info': ['联通4G', '移动4G', '电信4G', '双卡通', '全网通']
+        }
+    ]
+</script>
+<script>
+    //-------------------------------
+
+    var choose = document.querySelector('.choose');
+    var list = document.querySelector('.list');
+
+    var content = document.querySelector('.content');
+
+    //-------------------------------------------------
+    //生成内容
+    for (var i = 0; i < data.length; i++) {
+        createFn(data[i])
+    }
+
+    function createFn(data) {
+        var divItem = document.createElement('div'),
+                span = document.createElement('span'),
+                div = document.createElement('div');
+        divItem.classList.add('item');
+        span.innerHTML = data['title'];
+        div.classList.add('wrap')
+        for (var i = 0; i < data['info'].length; i++) {
+            var a = document.createElement('a');
+            a.href = 'javasript:;';
+            a.innerHTML = data['info'][i];
+            div.appendChild(a);
+        }
+        divItem.appendChild(span);
+        divItem.appendChild(div);
+        list.appendChild(divItem)
+    }
+    //----------------------------
+    //功能
+    var items = list.children;
+    var selectArr = [];
+    for (var i = 0; i < items.length; i++) {
+        items[i].index = i;
+        selectFn(items[i],content);
+    }
+    //点击函数
+    function selectFn(item,content) {
+        var wrapA = item.lastElementChild.children;
+        item.prev = wrapA[0];
+        for (var i = 0; i < wrapA.length; i++) {
+            wrapA[i].onclick = function () {
+                item.prev.classList.remove('active');
+                this.classList.toggle('active');
+                item.prev = this;
+                //去重复
+                NotRepeat(item, chooseFn(this, item,content));
+                //排序 //插入
+               // console.log(selectArr)
+                insert(arrSort(selectArr), content);
+            }
+        }
+    }
+    //生成元素
+    function chooseFn(itemA, parent,content) {
+        var div = document.createElement('div'), a = document.createElement('a');
+        div.innerHTML = itemA.innerHTML;
+        a.href = 'javascript:;';
+        a.innerHTML = 'x';
+        div.appendChild(a);
+        div.index = parent.index;
+        a.onclick = function () {
+            itemA.classList.remove('active');
+            //等于就删除
+            for (var i = 0; i < selectArr.length; i++) {
+                if(selectArr[i].index==parent.index){
+                    selectArr.splice(i,1)
+                    //console.log(1,selectArr)
+                    insert(selectArr, content);
+                }
+            }
+        };
+        return div;
+    }
+    //去重
+    function NotRepeat(item, child) {
+
+        if (selectArr.length) {
+            for (var i = 0; i < selectArr.length; i++) {
+
+                if (selectArr[i].index == child.index) {
+                    selectArr[i] = child;
+                    return selectArr;
+                }
+            }
+        }
+        selectArr.push(child);
+        return selectArr;
+    }
+    //排序
+    function arrSort(arr) {
+        arr.sort(function (a, b) {
+            return a.index - b.index;
+        });
+        return arr;
+    }
+    //插入
+    function insert(arr, parent) {
+        parent.innerHTML = '';
+        for (var i = 0; i < arr.length; i++) {
+            parent.appendChild(arr[i])
+        }
+    }
+
+</script>
+</body>
+</html>
